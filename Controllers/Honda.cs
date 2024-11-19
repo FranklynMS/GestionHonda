@@ -5,6 +5,8 @@ namespace GestionHonda.Controllers
 {
     public class Honda : Controller
     {
+        private static List<ChangeLog> _changeLogs = new List<ChangeLog>();
+
         private static List<HondaModel> _hondaModels = new List<HondaModel>();
 
       public IActionResult Index(string? searchTerm, string? sortOrder)
@@ -63,6 +65,32 @@ namespace GestionHonda.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult ChangeLog()
+        {
+            return View(_changeLogs);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var model = _hondaModels.FirstOrDefault(m => m.Id == id);
+            if (model != null)
+            {
+                _hondaModels.Remove(model);
+
+                // Registrar el cambio
+                _changeLogs.Add(new ChangeLog
+                {
+                    Id = _changeLogs.Count == 0 ? 1 : _changeLogs.Max(c => c.Id) + 1,
+                    Action = "Eliminado",
+                    ModelName = model.Name,
+                    Timestamp = DateTime.Now
+                });
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
         public IActionResult Edit(int id)
         {
             var model = _hondaModels.FirstOrDefault(m => m.Id == id);
@@ -78,6 +106,7 @@ namespace GestionHonda.Controllers
                 existing.Name = model.Name;
                 existing.Year = model.Year;
                 existing.Price = model.Price;
+              
 
                 if (image != null && image.Length > 0)
                 {
@@ -96,9 +125,20 @@ namespace GestionHonda.Controllers
 
                     existing.ImagePath = "/uploads/" + uniqueFileName;
                 }
+
+                // Registrar el cambio
+                _changeLogs.Add(new ChangeLog
+                {
+                    Id = _changeLogs.Count == 0 ? 1 : _changeLogs.Max(c => c.Id) + 1,
+                    Action = "Editado",
+                    ModelName = existing.Name,
+                    Timestamp = DateTime.Now
+                });
             }
 
             return RedirectToAction(nameof(Index));
         }
+
+     
     }
 }
