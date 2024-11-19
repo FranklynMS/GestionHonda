@@ -18,6 +18,21 @@
         <input asp-for="Price" class="form-control" type="number" step="0.01" />
         <span asp-validation-for="Price" class="text-danger"></span>
     </div>
+  <div>
+      <label asp-for="Color" class="form-label">Color</label>
+      <input asp-for="Color" class="form-control" />
+      <span asp-validation-for="Color" class="text-danger"></span>
+  </div>
+  <div>
+      <label asp-for="TipoMotor" class="form-label">TipoMotor</label>
+      <input asp-for="TipoMotor" class="form-control" />
+      <span asp-validation-for="TipoMotor" class="text-danger"></span>
+  </div>
+  <div>
+      <label asp-for="Transmision" class="form-label">Transmision</label>
+      <input asp-for="Transmision" class="form-control" />
+      <span asp-validation-for="Transmision" class="text-danger"></span>
+  </div>
     <div class="form-group">
         <label for="image" class="form-label">Imagen del Modelo</label>
         <input type="file" id="image" name="image" class="form-control" />
