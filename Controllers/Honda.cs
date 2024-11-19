@@ -7,16 +7,24 @@ namespace GestionHonda.Controllers
     {
         private static List<HondaModel> _hondaModels = new List<HondaModel>();
 
-        public IActionResult Index(string? searchTerm)
-        {
-            // Si no hay búsqueda, mostrar todos los modelos
-            var filteredModels = string.IsNullOrEmpty(searchTerm)
-                ? _hondaModels
-                : _hondaModels.Where(m => m.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+      public IActionResult Index(string? searchTerm, string? sortOrder)
+ {
+     var filteredModels = string.IsNullOrEmpty(searchTerm)
+         ? _hondaModels
+         : _hondaModels.Where(m => m.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            ViewBag.SearchTerm = searchTerm; // Pasar el término de búsqueda a la vista
-            return View(filteredModels);
-        }
+     // Ordenar según el criterio
+     filteredModels = sortOrder switch
+     {
+         "Name" => filteredModels.OrderBy(m => m.Name).ToList(),
+         "Year" => filteredModels.OrderBy(m => m.Year).ToList(),
+         "Price" => filteredModels.OrderBy(m => m.Price).ToList(),
+         _ => filteredModels
+     };
+
+     ViewBag.SortOrder = sortOrder; // Pasar el criterio a la vista
+     return View(filteredModels);
+ }
 
         public IActionResult Create()
         {
