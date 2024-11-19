@@ -72,7 +72,14 @@ namespace GestionHonda.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-  
+        public IActionResult Search(string query)
+        {
+            var resultados = _hondaModels.Where(m => m.Name.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+            return View("Index", resultados);
+        }
+
+
+
 
     }
 }
