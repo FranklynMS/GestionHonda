@@ -15,6 +15,12 @@ namespace GestionHonda.Models
         [Range(0.01, double.MaxValue, ErrorMessage = "Tiene que Insertar Un Valor Positivo")]
         public decimal Price { get; set; }
 
-        public string? ImagePath { get; set; } // Ruta para la imagen
+        public string? ImagePath { get; set; } 
+
+        public string Color { get; set; }
+        
+        public string TipoMotor { get; set; } 
+        
+        public string Transmision { get; set; } 
     }
 }
