@@ -17,10 +17,13 @@ namespace GestionHonda.Models
 
         public string? ImagePath { get; set; } 
 
+        [Required(ErrorMessage = "Debe suministrar un color")]
         public string Color { get; set; }
-        
-        public string TipoMotor { get; set; } 
-        
-        public string Transmision { get; set; } 
+
+       [Required(ErrorMessage = "Debe indicar el tipo de motor")]
+        public string TipoMotor { get; set; }
+
+        [Required(ErrorMessage = "Debe especificar la transmisión")]
+        public string Transmision { get; set; }
     }
 }
