@@ -1,0 +1,50 @@
+﻿@model List<GestionHonda.Models.HondaModel>
+
+<h2 class="text-center mt-4">Modelos Honda</h2>
+
+<div class="container mt-4">
+    <!-- Barra de búsqueda -->
+    <form method="get" action="/Honda" class="mb-4 p-3 border rounded shadow-sm bg-light">
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" name="searchTerm" class="form-control" placeholder="Buscar modelo..." />
+            </div>
+            <div class="col-md-2 text-end">
+                <button type="submit" class="btn btn-primary w-100">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Botón para agregar un nuevo modelo -->
+    <div class="text-end mb-3">
+        <a href="/Honda/Create" class="btn btn-success">Agregar Modelo</a>
+    </div>
+
+    <!-- Tabla de modelos -->
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Año Produccion</th>
+                <th>Precio De Fabrica</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Year</td>
+                    <td>@string.Format("{0:C}", item.Price)</td>
+                    <td>
+                        <a href="/Honda/Edit/@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="/Honda/Delete/@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
