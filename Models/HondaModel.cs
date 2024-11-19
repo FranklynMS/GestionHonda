@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace GestionHonda.Models
 {
@@ -14,5 +14,7 @@ namespace GestionHonda.Models
 
         [Range(0.01, double.MaxValue, ErrorMessage = "Tiene que Insertar Un Valor Positivo")]
         public decimal Price { get; set; }
+
+        public string? ImagePath { get; set; } // Ruta para la imagen
     }
 }
