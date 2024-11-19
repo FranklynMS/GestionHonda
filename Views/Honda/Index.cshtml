@@ -28,6 +28,10 @@
                 <th>Nombre</th>
                 <th>Año Produccion</th>
                 <th>Precio De Fabrica</th>
+                <th>Color</th>
+                <th>Tipo de Motor</th>
+                <th>Transmisión</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -38,7 +42,16 @@
                     <td>@item.Id</td>
                     <td>@item.Name</td>
                     <td>@item.Year</td>
+                    <td>@item.Color</td>
+                    <td>@item.TipoMotor</td>
+                    <td>@item.Transmision</td>
                     <td>@string.Format("{0:C}", item.Price)</td>
+                    <td>
+                          @if (!string.IsNullOrEmpty(item.ImagePath))
+                          {
+                          <img src="@item.ImagePath" alt="Imagen del modelo" style="max-width:100px;" />
+                          }
+                    </td>
                     <td>
                         <a href="/Honda/Edit/@item.Id" class="btn btn-warning btn-sm">Editar</a>
                         <a href="/Honda/Delete/@item.Id" class="btn btn-danger btn-sm">Eliminar</a>
